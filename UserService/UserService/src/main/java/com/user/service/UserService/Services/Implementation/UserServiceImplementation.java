@@ -33,8 +33,10 @@ public class UserServiceImplementation implements UserService {
         return userRepository.findAll();
     }
 
+
+
     @Override
-    public User getUser(String userId) {
+    public User getUser(Integer userId) {
         Optional<User> userOptional = userRepository.findById(userId);
 
         if(userOptional.isEmpty()){
