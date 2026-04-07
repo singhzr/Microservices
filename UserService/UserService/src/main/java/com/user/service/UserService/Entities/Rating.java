@@ -12,8 +12,9 @@ import lombok.experimental.FieldDefaults;
 public class Rating {
 
     String ratingId;
-    String userId;
-    String hotelId;
+    Integer userId;
+    Integer hotelId;
     String rating;
     String feedback;
+    Hotel hotel;
 }

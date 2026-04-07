@@ -14,7 +14,6 @@ public class ServiceRegistryApplication {
 
 }
 
-
 /*
 
 @EnableEurekaServer is an annotation used in Spring Boot applications to turn your app

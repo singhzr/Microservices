@@ -30,7 +30,7 @@ public class HotelController {
 
         Hotel hotel = hotelService.get(hotelId);
 
-        return new ResponseEntity<>(hotel, HttpStatus.FOUND);
+        return new ResponseEntity<>(hotel, HttpStatus.OK);
     }
 
     @GetMapping

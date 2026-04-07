@@ -30,20 +30,20 @@ public class RatingController {
 
         List<Rating> ratingList = ratingService.getRatings();
 
-        return new ResponseEntity<>(ratingList, HttpStatus.FOUND);
+        return new ResponseEntity<>(ratingList, HttpStatus.OK);
     }
     @GetMapping("/users/{userId}")
-    public ResponseEntity<List<Rating>> getRatingByUserId(@PathVariable String userId){
+    public ResponseEntity<List<Rating>> getRatingByUserId(@PathVariable Integer userId){
 
         List<Rating> ratingList = ratingService.getRatingByUserId(userId);
 
-        return new ResponseEntity<>(ratingList, HttpStatus.FOUND);
+        return new ResponseEntity<>(ratingList, HttpStatus.OK);
     }
     @GetMapping("/hotels/{hotelId}")
-    public ResponseEntity<List<Rating>> getRatingByHotelId(@PathVariable String hotelId){
+    public ResponseEntity<List<Rating>> getRatingByHotelId(@PathVariable Integer hotelId){
 
         List<Rating> ratingList = ratingService.getRatingByHotelId(hotelId);
 
-        return new ResponseEntity<>(ratingList, HttpStatus.FOUND);
+        return new ResponseEntity<>(ratingList, HttpStatus.OK);
     }
 }

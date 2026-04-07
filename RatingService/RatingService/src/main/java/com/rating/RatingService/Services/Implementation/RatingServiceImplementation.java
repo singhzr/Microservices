@@ -33,12 +33,12 @@ public class RatingServiceImplementation implements RatingService {
     }
 
     @Override
-    public List<Rating> getRatingByUserId(String userId) {
+    public List<Rating> getRatingByUserId(Integer userId) {
         return ratingRepository.findByUserId(userId);
     }
 
     @Override
-    public List<Rating> getRatingByHotelId(String hotelId) {
+    public List<Rating> getRatingByHotelId(Integer hotelId) {
         return ratingRepository.findByHotelId(hotelId);
     }
 }

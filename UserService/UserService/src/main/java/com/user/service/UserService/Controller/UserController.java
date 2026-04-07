@@ -30,7 +30,7 @@ public class UserController {
 
         User user = userService.getUser(userId);
 
-        return new ResponseEntity<>(user, HttpStatus.FOUND);
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping

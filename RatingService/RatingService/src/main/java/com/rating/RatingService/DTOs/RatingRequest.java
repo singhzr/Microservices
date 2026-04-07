@@ -9,8 +9,8 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RatingRequest {
-    String userId;
-    String hotelId;
+    Integer userId;
+    Integer hotelId;
     String rating;
     String feedback;
 }
