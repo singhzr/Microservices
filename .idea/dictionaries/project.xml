@@ -3,6 +3,8 @@
     <words>
       <w>apigateway</w>
       <w>hotelservice</w>
+      <w>mydb</w>
+      <w>postgre</w>
       <w>ratingservice</w>
       <w>userservice</w>
     </words>

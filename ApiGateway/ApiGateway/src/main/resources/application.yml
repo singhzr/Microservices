@@ -1,10 +1,19 @@
 server:
   port: 8084
 
+#If you set server.port: 8084, your application will listen for HTTP requests on port 8084.
+
 spring:
   application:
     name: APIGATEWAY
 
+#  Sets the name of your Spring Boot application.
+#  In this case, the application is named APIGATEWAY.
+#  This name is often used in Spring Cloud environments (like Eureka, or Gateway routing) to identify the service.
+
+#  Typical use in microservices:
+#  When using Spring Cloud Gateway, this name can help with service discovery.
+#  In logs, the service name may appear instead of just a port number, which makes debugging easier.
 
   cloud:
     gateway:
@@ -24,14 +33,96 @@ spring:
           predicates:
             - Path=/ratings/**
 
+#  1. What is Spring Cloud Gateway?
 
+#  It’s a library/framework that acts as an API Gateway in microservices architecture.
+#  An API Gateway is the single entry point for all client requests to your microservices.
 
+#  It can:
+#  Route requests to different services
+#  Apply filters (e.g., authentication, logging, rate limiting)
+#  Handle load balancing
+
+#  2. cloud.gateway in application.yml
+#  cloud = namespace for all Spring Cloud-related settings
+#  gateway = settings specific to Spring Cloud Gateway
+
+#  Think of Spring Cloud Gateway as a traffic director.
+
+#  Spring Cloud Gateway listens on its own port, say 8084.
+#  When it receives a request, it forwards that request to the target service on another port (like 8081 or 8082).
+
+#  It does not need special privileges to send traffic to these ports—HTTP requests are enough.
+
+#  What Are Routes?
+#
+#  In Spring Cloud Gateway:
+#  A route defines how incoming requests are mapped to backend services.
+#
+#  Think of it as a rule:
+#  “If a request matches certain conditions (predicates), forward it to this URI (backend service) and optionally apply filters.
+#
+#  - id: USERSERVICE
+#  The id is just a name for the route.
+#  It does not affect routing behavior by itself.
+#
+#  uri: lb://USERSERVICE
+#  This tells Gateway where to send the request if it matches the predicates.
+#  In this case, any request that matches the predicates will be forwarded to the User Service's instance.
+#
+#  Gateway sees lb://USERSERVICE in the route.
+#  Spring Cloud LoadBalancer queries service discovery (Eureka).
+#  It chooses one instance using a load balancing strategy.
+#  Gateway forwards the request to that instance.
+#
+#  How It Works Internally
+#  A request comes to the Gateway, e.g., http://localhost:8080/ratings/99.
+#  Gateway checks the path against the predicate /ratings/**.
+#  If it matches, Gateway selects the route associated with this predicate.
+#  Gateway forwards the request to the uri defined for that route (e.g., http://localhost:8083 or lb://RATINGSERVICE).
 
 eureka:
-  instance:
-    prefer-ip-address: true
   client:
     fetch-registry: true
     register-with-eureka: true
     service-url:
       defaultZone: http://localhost:8761/eureka
+
+#   eureka:
+#   These settings belong to the Eureka system
+#
+#   client:
+#   Because your app is acting as a Eureka client, not the server.
+#
+#   client: groups all settings related to:
+#   Registering with Eureka
+#   Fetching the registry
+#   Talking to the server
+
+#   fetch-registry: true
+#   Download the list of all registered services from the Eureka server.
+
+#   register-with-eureka: true
+#   Register yourself with the Eureka server.”
+#
+#   service-url:
+#     defaultZone: http://localhost:8761/eureka
+#     This is the default address your Eureka client will use to connect to the Eureka server. Eureka server is running on 8761
+
+#   service-url = category / container
+#   defaultZone = actual address inside it
+#
+#   What is a “zone”?
+#   A zone is like a region or cluster of Eureka servers.
+#   Example:
+#   service-url:
+#   defaultZone: http://localhost:8761/eureka
+#   zone2: http://localhost:8762/eureka
+#
+#   This allows:
+#   High availability
+#   Failover if one server goes down
+
+#   Why defaultZone specifically?
+#   It’s the fallback / primary zone
+#   Used when you don’t define custom zones

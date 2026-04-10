@@ -86,6 +86,11 @@ public interface RatingService {
     Without Service Discovery: You can add url = "http://localhost:8082" to specify
     the endpoint manually.
 
+    name="RATINGSERVICE" used for?
+
+    Feign configuration (application.yml)
+    Logging
+    Service discovery (Eureka, etc.)
 
 ---> What @PostMapping Means in Feign
     In Spring MVC, @PostMapping("/ratings") is used in controllers to handle
